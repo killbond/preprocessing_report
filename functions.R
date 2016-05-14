@@ -163,9 +163,9 @@ modelSummary <- function(prob, actual) {
   sensitivity  <- performance(pred_fit, x.measure = "cutoff", measure = "sens")
   
   # ќтобразим обе зависимости на графике
-  plot(specificity, col = "red", lwd = 1)
-  plot(add = T, sensitivity , col = "blue", lwd = 1)
-  plot(add = T, performance(pred_fit, x.measure = "cutoff", measure = "rch") , col = "green", lwd = 2)
+  plot(specificity, col = "red", lwd = 3, xlab = '1 - Specificity', ylab = 'Sensetivity')
+  plot(add = T, sensitivity , col = "blue", lwd = 3)
+  plot(add = T, performance(pred_fit, x.measure = "cutoff", measure = "rch") , col = "green", lwd = 4)
   
   # ƒл€ определени€ порога классификации посчитаем абсолютную разницу между значени€ми кривых специфичности и чувствительности
   diff <- abs(unlist(specificity@y.values) - unlist(sensitivity@y.values))
@@ -174,7 +174,7 @@ modelSummary <- function(prob, actual) {
   threshold <- unlist(sensitivity@x.values)[match(min(diff), diff)]
   
   # ќтобразим порог на графике
-  abline(v = threshold, lwd = 2)
+  abline(v = threshold, lwd = 1)
   
   # »спользу€ полученную веро€тность и порог классификации, составим вектор ответов дл€ полученной модели
   pred_resp  <- factor(ifelse(prob > threshold, 1, 0))
